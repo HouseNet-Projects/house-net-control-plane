@@ -75,6 +75,7 @@ Every future repository must be proposed and classified before creation. The reg
 | Ownership, approval and scope | [`policy/authority.json`](policy/authority.json) |
 | A/B/C classification | [`policy/repository-classes.json`](policy/repository-classes.json) |
 | Repository foundation and lifecycle | [`policy/repository-baseline.json`](policy/repository-baseline.json) |
+| Migration intake and adoption | [`docs/MIGRATION-LIFECYCLE.md`](docs/MIGRATION-LIFECYCLE.md) · `bin/housenet-import` |
 | Git and merge behavior | [`policy/git.json`](policy/git.json) · [`policy/merge.json`](policy/merge.json) |
 | Actions and CI | [`policy/actions.json`](policy/actions.json) |
 | Dependency security | [`policy/security.json`](policy/security.json) |
