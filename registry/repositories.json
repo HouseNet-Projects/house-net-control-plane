@@ -60,8 +60,8 @@
         "HN-SECRETS",
         "HN-SIGNAL",
         "HN-SOURCES",
-        "HN-VERSIONING",
-        "HN-VERSION-SINGLE-SOURCE"
+        "HN-VERSION-SINGLE-SOURCE",
+        "HN-VERSIONING"
       ],
       "approval": {
         "state": "approved",
@@ -152,8 +152,8 @@
         "HN-SECRETS",
         "HN-SIGNAL",
         "HN-SOURCES",
-        "HN-VERSIONING",
-        "HN-VERSION-SINGLE-SOURCE"
+        "HN-VERSION-SINGLE-SOURCE",
+        "HN-VERSIONING"
       ],
       "approval": {
         "state": "approved",
