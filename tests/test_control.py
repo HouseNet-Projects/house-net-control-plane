@@ -181,7 +181,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_english_only_human_document_fails(self):
         (self.root/'README.md').write_text('# English only\n')
-        self.reject(lambda:c.validate_bilingual_documents(self.root),'Armenian section')
+        self.reject(lambda:c.validate_bilingual_documents(self.root),'English section')
 
     def test_armenian_only_human_document_fails(self):
         (self.root/'README.md').write_text('# Միայն հայերեն\n\n## Հայերեն\n\nԲովանդակություն\n')

@@ -1,5 +1,7 @@
 # Repository lifecycle
 
+## English
+
 **PROPOSE → CLASSIFY → OWNER OK → CREATE → BOOTSTRAP → VALIDATE → OPERATE → RECLASSIFY / ARCHIVE**
 
 1. Propose name, purpose, why a separate repository is warranted, A/B/C class, technology, CI need, deployment, sensitivity and minimum justified baseline.
@@ -12,11 +14,11 @@
 8. Recommend reclassification when impact grows. Apply changes only after owner approval.
 9. Before approved archival, document status, replacement, migration and last supported version where applicable. Preserve history.
 
-## This repository
+### This repository
 
 Class A because it controls policy, approvals and agent behavior. Runtime: Python with JSON Schema and YAML parsing; CI is meaningful. Deployment: none. Sensitivity: governance integrity; no secrets or customer data. Recovery: reviewed revert and revalidation. The only initial registry entry is this repository.
 
-## Policy updates
+### Policy updates
 
 An approved semantic change creates a reviewed policy snapshot and regenerated human view. Update manifest hashes and coverage deliberately. Issue new lock metadata and an executable snapshot to affected repositories through approved PRs. Never change the immutable source-policy artifact; new owner sources receive their own provenance records and a reviewed migration.
 

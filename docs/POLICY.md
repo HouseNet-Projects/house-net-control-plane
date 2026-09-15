@@ -1,8 +1,10 @@
 # HouseNet policy · 1.1.0
 
+## English
+
 Generated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).
 
-## HN-AUTHOR-EMAIL · git.user.email
+### HN-AUTHOR-EMAIL · git.user.email
 
 MANDATORY · environment · Classes A, B, C
 
@@ -12,7 +14,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: preflight. Source sections: 12.
 
-## HN-AUTHOR-NAME · git.user.name
+### HN-AUTHOR-NAME · git.user.name
 
 MANDATORY · environment · Classes A, B, C
 
@@ -22,7 +24,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: preflight. Source sections: 12.
 
-## HN-BRANCH · git.default_branch
+### HN-BRANCH · git.default_branch
 
 MANDATORY · repository · Classes A, B, C
 
@@ -32,7 +34,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_settings_audit. Source sections: 8.
 
-## HN-BRANCH-NAMES · git.branch_names
+### HN-BRANCH-NAMES · git.branch_names
 
 RECOMMENDED · repository · Classes A, B, C
 
@@ -48,7 +50,7 @@ RECOMMENDED · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 8.
 
-## HN-CI · actions.ci
+### HN-CI · actions.ci
 
 MANDATORY · repository · Classes A, B, C
 
@@ -71,7 +73,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 15.
 
-## HN-CLASS-A · classification.A
+### HN-CLASS-A · classification.A
 
 MANDATORY · repository · Classes A
 
@@ -107,7 +109,7 @@ MANDATORY · repository · Classes A
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 5.
 
-## HN-CLASS-B · classification.B
+### HN-CLASS-B · classification.B
 
 MANDATORY · repository · Classes B
 
@@ -140,7 +142,7 @@ MANDATORY · repository · Classes B
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 5.
 
-## HN-CLASS-C · classification.C
+### HN-CLASS-C · classification.C
 
 MANDATORY · repository · Classes C
 
@@ -170,7 +172,7 @@ MANDATORY · repository · Classes C
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 5.
 
-## HN-CLASSIFICATION · repository.classification
+### HN-CLASSIFICATION · repository.classification
 
 MANDATORY · repository · Classes A, B, C
 
@@ -187,7 +189,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 5.
 
-## HN-COMMITS · git.commit_messages
+### HN-COMMITS · git.commit_messages
 
 RECOMMENDED · repository · Classes A, B, C
 
@@ -211,7 +213,7 @@ RECOMMENDED · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 23.
 
-## HN-CONFIGURATION · github.configuration_change
+### HN-CONFIGURATION · github.configuration_change
 
 MANDATORY · account · Classes A, B, C
 
@@ -224,7 +226,7 @@ MANDATORY · account · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 2.
 
-## HN-CREATE · repository.creation_baseline
+### HN-CREATE · repository.creation_baseline
 
 MANDATORY · repository · Classes A, B, C
 
@@ -253,7 +255,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 4.
 
-## HN-CREATION · repository.creation
+### HN-CREATION · repository.creation
 
 MANDATORY · repository · Classes A, B, C
 
@@ -266,7 +268,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: registry_and_owner_review. Source sections: 2.
 
-## HN-DEPENDENCIES · security.dependencies
+### HN-DEPENDENCIES · security.dependencies
 
 MANDATORY · repository · Classes A, B, C
 
@@ -284,7 +286,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 17.
 
-## HN-DEPLOYMENT · actions.deployment
+### HN-DEPLOYMENT · actions.deployment
 
 REPO_SPECIFIC · repository · Classes A, B, C
 
@@ -308,7 +310,7 @@ REPO_SPECIFIC · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: registration_and_owner_review. Source sections: 16.
 
-## HN-DEPRECATION · repository.deprecation
+### HN-DEPRECATION · repository.deprecation
 
 MANDATORY · repository · Classes A, B, C
 
@@ -327,7 +329,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 26.
 
-## HN-DESTRUCTIVE · operation.destructive
+### HN-DESTRUCTIVE · operation.destructive
 
 MANDATORY · repository · Classes A, B, C
 
@@ -355,7 +357,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: exact_owner. Enforcement: owner_review. Source sections: 3.
 
-## HN-DEVELOPMENT · git.development_flow
+### HN-DEVELOPMENT · git.development_flow
 
 MANDATORY · repository · Classes A, B, C
 
@@ -371,7 +373,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 8.
 
-## HN-DOC-HUMAN-VISIBLE-BILINGUAL · documentation.human_visible_bilingual
+### HN-DOC-HUMAN-VISIBLE-BILINGUAL · documentation.human_visible_bilingual
 
 MANDATORY · repository · Classes A, B, C
 
@@ -389,7 +391,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: bilingual_document_validator. Source sections: .
 
-## HN-EXPLICIT-IDENTITY · git.user.useConfigOnly
+### HN-EXPLICIT-IDENTITY · git.user.useConfigOnly
 
 MANDATORY · environment · Classes A, B, C
 
@@ -399,7 +401,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: preflight. Source sections: 12.
 
-## HN-FILES · repository.files
+### HN-FILES · repository.files
 
 RECOMMENDED · repository · Classes A, B, C
 
@@ -423,7 +425,7 @@ RECOMMENDED · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 19.
 
-## HN-GOVERNANCE · repository.governance_files
+### HN-GOVERNANCE · repository.governance_files
 
 REPO_SPECIFIC · repository · Classes A, B, C
 
@@ -446,7 +448,7 @@ REPO_SPECIFIC · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: registration_and_owner_review. Source sections: 20.
 
-## HN-IDENTITY · github.identity
+### HN-IDENTITY · github.identity
 
 MANDATORY · environment · Classes A, B, C
 
@@ -456,7 +458,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: preflight. Source sections: 2.
 
-## HN-INIT-BRANCH · git.init.defaultBranch
+### HN-INIT-BRANCH · git.init.defaultBranch
 
 MANDATORY · environment · Classes A, B, C
 
@@ -466,7 +468,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: preflight. Source sections: 12.
 
-## HN-LEVELS · policy.levels
+### HN-LEVELS · policy.levels
 
 MANDATORY · control_plane · Classes A, B, C
 
@@ -481,7 +483,7 @@ MANDATORY · control_plane · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: schema_validator. Source sections: 28.
 
-## HN-LICENSE · repository.license
+### HN-LICENSE · repository.license
 
 MANDATORY · repository · Classes A, B, C
 
@@ -494,7 +496,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 21.
 
-## HN-METHODS · merge.methods
+### HN-METHODS · merge.methods
 
 RECOMMENDED · repository · Classes A, B, C
 
@@ -511,7 +513,7 @@ RECOMMENDED · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_settings_audit. Source sections: 11.
 
-## HN-NAMESPACE · github.namespace
+### HN-NAMESPACE · github.namespace
 
 MANDATORY · repository · Classes A, B, C
 
@@ -521,7 +523,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 2.
 
-## HN-NAMING · repository.naming
+### HN-NAMING · repository.naming
 
 RECOMMENDED · repository · Classes A, B, C
 
@@ -541,7 +543,7 @@ RECOMMENDED · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_validator. Source sections: 7.
 
-## HN-OPERATING-FLOW · engineering.operating_flow
+### HN-OPERATING-FLOW · engineering.operating_flow
 
 MANDATORY · environment · Classes A, B, C
 
@@ -561,7 +563,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 29.
 
-## HN-OUT-OF-SCOPE · engineering.out_of_scope
+### HN-OUT-OF-SCOPE · engineering.out_of_scope
 
 MANDATORY · environment · Classes A, B, C
 
@@ -574,7 +576,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 29.
 
-## HN-PERMISSIONS · actions.permissions
+### HN-PERMISSIONS · actions.permissions
 
 MANDATORY · repository · Classes A, B, C
 
@@ -589,7 +591,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: workflow_validator. Source sections: 13.
 
-## HN-PROPORTIONALITY · engineering.proportionality
+### HN-PROPORTIONALITY · engineering.proportionality
 
 MANDATORY · environment · Classes A, B, C
 
@@ -609,7 +611,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 30.
 
-## HN-PROTECTION · merge.protection
+### HN-PROTECTION · merge.protection
 
 MANDATORY · repository · Classes A, B, C
 
@@ -633,7 +635,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: repository_settings_audit. Source sections: 9.
 
-## HN-PRS · repository.pull_requests
+### HN-PRS · repository.pull_requests
 
 RECOMMENDED · repository · Classes A, B, C
 
@@ -654,7 +656,7 @@ RECOMMENDED · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 24.
 
-## HN-PULL · git.pull.ff
+### HN-PULL · git.pull.ff
 
 MANDATORY · environment · Classes A, B, C
 
@@ -664,7 +666,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: preflight. Source sections: 12.
 
-## HN-PURPOSE · engineering.purpose
+### HN-PURPOSE · engineering.purpose
 
 MANDATORY · environment · Classes A, B, C
 
@@ -676,7 +678,7 @@ MANDATORY · environment · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 1.
 
-## HN-RECLASSIFY · repository.reclassification
+### HN-RECLASSIFY · repository.reclassification
 
 MANDATORY · repository · Classes A, B, C
 
@@ -689,7 +691,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 6.
 
-## HN-REVIEW · merge.review
+### HN-REVIEW · merge.review
 
 MANDATORY · repository · Classes A, B, C
 
@@ -703,7 +705,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 10.
 
-## HN-SCOPE · engineering.scope
+### HN-SCOPE · engineering.scope
 
 MANDATORY · repository · Classes A, B, C
 
@@ -717,7 +719,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 25.
 
-## HN-SECRETS · security.secrets
+### HN-SECRETS · security.secrets
 
 MANDATORY · repository · Classes A, B, C
 
@@ -743,7 +745,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: content_scan_and_owner_review. Source sections: 18.
 
-## HN-SIGNAL · notifications.delivery
+### HN-SIGNAL · notifications.delivery
 
 MANDATORY · account · Classes A, B, C
 
@@ -767,7 +769,7 @@ MANDATORY · account · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: owner_review. Source sections: 27.
 
-## HN-SOURCES · actions.sources
+### HN-SOURCES · actions.sources
 
 MANDATORY · repository · Classes A, B, C
 
@@ -786,7 +788,7 @@ MANDATORY · repository · Classes A, B, C
 
 Approval: explicit_owner. Enforcement: workflow_validator. Source sections: 14.
 
-## HN-VERSIONING · repository.versioning
+### HN-VERSIONING · repository.versioning
 
 RECOMMENDED · repository · Classes A, B, C
 
@@ -808,7 +810,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Մեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։
 
-## HN-AUTHOR-EMAIL · git.user.email
+### HN-AUTHOR-EMAIL · git.user.email
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -818,7 +820,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ preflight։ Աղբյուրի բաժիններ՝ 12։
 
-## HN-AUTHOR-NAME · git.user.name
+### HN-AUTHOR-NAME · git.user.name
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -828,7 +830,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ preflight։ Աղբյուրի բաժիններ՝ 12։
 
-## HN-BRANCH · git.default_branch
+### HN-BRANCH · git.default_branch
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -838,7 +840,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_settings_audit։ Աղբյուրի բաժիններ՝ 8։
 
-## HN-BRANCH-NAMES · git.branch_names
+### HN-BRANCH-NAMES · git.branch_names
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -854,7 +856,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 8։
 
-## HN-CI · actions.ci
+### HN-CI · actions.ci
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -877,7 +879,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 15։
 
-## HN-CLASS-A · classification.A
+### HN-CLASS-A · classification.A
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A
 
@@ -913,7 +915,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 5։
 
-## HN-CLASS-B · classification.B
+### HN-CLASS-B · classification.B
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ B
 
@@ -946,7 +948,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 5։
 
-## HN-CLASS-C · classification.C
+### HN-CLASS-C · classification.C
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ C
 
@@ -976,7 +978,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 5։
 
-## HN-CLASSIFICATION · repository.classification
+### HN-CLASSIFICATION · repository.classification
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -993,7 +995,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 5։
 
-## HN-COMMITS · git.commit_messages
+### HN-COMMITS · git.commit_messages
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1017,7 +1019,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 23։
 
-## HN-CONFIGURATION · github.configuration_change
+### HN-CONFIGURATION · github.configuration_change
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ account · Դասեր՝ A, B, C
 
@@ -1030,7 +1032,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 2։
 
-## HN-CREATE · repository.creation_baseline
+### HN-CREATE · repository.creation_baseline
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1059,7 +1061,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 4։
 
-## HN-CREATION · repository.creation
+### HN-CREATION · repository.creation
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1072,7 +1074,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ registry_and_owner_review։ Աղբյուրի բաժիններ՝ 2։
 
-## HN-DEPENDENCIES · security.dependencies
+### HN-DEPENDENCIES · security.dependencies
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1090,7 +1092,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 17։
 
-## HN-DEPLOYMENT · actions.deployment
+### HN-DEPLOYMENT · actions.deployment
 
 Մակարդակ՝ REPO_SPECIFIC · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1114,7 +1116,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ registration_and_owner_review։ Աղբյուրի բաժիններ՝ 16։
 
-## HN-DEPRECATION · repository.deprecation
+### HN-DEPRECATION · repository.deprecation
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1133,7 +1135,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 26։
 
-## HN-DESTRUCTIVE · operation.destructive
+### HN-DESTRUCTIVE · operation.destructive
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1161,7 +1163,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ exact_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 3։
 
-## HN-DEVELOPMENT · git.development_flow
+### HN-DEVELOPMENT · git.development_flow
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1177,7 +1179,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 8։
 
-## HN-DOC-HUMAN-VISIBLE-BILINGUAL · documentation.human_visible_bilingual
+### HN-DOC-HUMAN-VISIBLE-BILINGUAL · documentation.human_visible_bilingual
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1195,7 +1197,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ bilingual_document_validator։ Աղբյուրի բաժիններ՝ ։
 
-## HN-EXPLICIT-IDENTITY · git.user.useConfigOnly
+### HN-EXPLICIT-IDENTITY · git.user.useConfigOnly
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1205,7 +1207,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ preflight։ Աղբյուրի բաժիններ՝ 12։
 
-## HN-FILES · repository.files
+### HN-FILES · repository.files
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1229,7 +1231,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 19։
 
-## HN-GOVERNANCE · repository.governance_files
+### HN-GOVERNANCE · repository.governance_files
 
 Մակարդակ՝ REPO_SPECIFIC · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1252,7 +1254,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ registration_and_owner_review։ Աղբյուրի բաժիններ՝ 20։
 
-## HN-IDENTITY · github.identity
+### HN-IDENTITY · github.identity
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1262,7 +1264,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ preflight։ Աղբյուրի բաժիններ՝ 2։
 
-## HN-INIT-BRANCH · git.init.defaultBranch
+### HN-INIT-BRANCH · git.init.defaultBranch
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1272,7 +1274,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ preflight։ Աղբյուրի բաժիններ՝ 12։
 
-## HN-LEVELS · policy.levels
+### HN-LEVELS · policy.levels
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ control_plane · Դասեր՝ A, B, C
 
@@ -1287,7 +1289,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ schema_validator։ Աղբյուրի բաժիններ՝ 28։
 
-## HN-LICENSE · repository.license
+### HN-LICENSE · repository.license
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1300,7 +1302,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 21։
 
-## HN-METHODS · merge.methods
+### HN-METHODS · merge.methods
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1317,7 +1319,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_settings_audit։ Աղբյուրի բաժիններ՝ 11։
 
-## HN-NAMESPACE · github.namespace
+### HN-NAMESPACE · github.namespace
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1327,7 +1329,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 2։
 
-## HN-NAMING · repository.naming
+### HN-NAMING · repository.naming
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1347,7 +1349,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_validator։ Աղբյուրի բաժիններ՝ 7։
 
-## HN-OPERATING-FLOW · engineering.operating_flow
+### HN-OPERATING-FLOW · engineering.operating_flow
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1367,7 +1369,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 29։
 
-## HN-OUT-OF-SCOPE · engineering.out_of_scope
+### HN-OUT-OF-SCOPE · engineering.out_of_scope
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1380,7 +1382,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 29։
 
-## HN-PERMISSIONS · actions.permissions
+### HN-PERMISSIONS · actions.permissions
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1395,7 +1397,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ workflow_validator։ Աղբյուրի բաժիններ՝ 13։
 
-## HN-PROPORTIONALITY · engineering.proportionality
+### HN-PROPORTIONALITY · engineering.proportionality
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1415,7 +1417,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 30։
 
-## HN-PROTECTION · merge.protection
+### HN-PROTECTION · merge.protection
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1439,7 +1441,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ repository_settings_audit։ Աղբյուրի բաժիններ՝ 9։
 
-## HN-PRS · repository.pull_requests
+### HN-PRS · repository.pull_requests
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1460,7 +1462,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 24։
 
-## HN-PULL · git.pull.ff
+### HN-PULL · git.pull.ff
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1470,7 +1472,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ preflight։ Աղբյուրի բաժիններ՝ 12։
 
-## HN-PURPOSE · engineering.purpose
+### HN-PURPOSE · engineering.purpose
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ environment · Դասեր՝ A, B, C
 
@@ -1482,7 +1484,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 1։
 
-## HN-RECLASSIFY · repository.reclassification
+### HN-RECLASSIFY · repository.reclassification
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1495,7 +1497,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 6։
 
-## HN-REVIEW · merge.review
+### HN-REVIEW · merge.review
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1509,7 +1511,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 10։
 
-## HN-SCOPE · engineering.scope
+### HN-SCOPE · engineering.scope
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1523,7 +1525,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 25։
 
-## HN-SECRETS · security.secrets
+### HN-SECRETS · security.secrets
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1549,7 +1551,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ content_scan_and_owner_review։ Աղբյուրի բաժիններ՝ 18։
 
-## HN-SIGNAL · notifications.delivery
+### HN-SIGNAL · notifications.delivery
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ account · Դասեր՝ A, B, C
 
@@ -1573,7 +1575,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ owner_review։ Աղբյուրի բաժիններ՝ 27։
 
-## HN-SOURCES · actions.sources
+### HN-SOURCES · actions.sources
 
 Մակարդակ՝ MANDATORY · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
@@ -1592,7 +1594,7 @@ Approval: explicit_owner. Enforcement: owner_review. Source sections: 22.
 
 Հաստատում՝ explicit_owner։ Կիրարկում՝ workflow_validator։ Աղբյուրի բաժիններ՝ 14։
 
-## HN-VERSIONING · repository.versioning
+### HN-VERSIONING · repository.versioning
 
 Մակարդակ՝ RECOMMENDED · Տիրույթ՝ repository · Դասեր՝ A, B, C
 
