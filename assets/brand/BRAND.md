@@ -1,5 +1,7 @@
 # HouseNet brand source
 
+## English
+
 This brand layer uses first-party assets served by the official HouseNet website.
 
 ## Preserved logo assets
@@ -20,3 +22,13 @@ The logo directly contains `#E3003A`, `#1D1D1B`, `#6F6F6E`, `#8A1230`, and white
 ## Design rule
 
 The preserved logo geometry is never redrawn, recolored, or edited. The control-plane hero uses the original files as local `<image>` references and keeps the operational status text separate from the mark.
+
+---
+
+## Հայերեն
+
+# HouseNet բրենդի աղբյուր
+
+Այս շերտը օգտագործում է HouseNet-ի պաշտոնական կայքից ստացված առաջին կողմի asset-ները։ `housenet-main-logo.svg`-ը և `housenet-footer-logo.svg`-ը պահպանված են byte-for-byte անփոփոխ և ունեն աղբյուր URL-ներն ու SHA-256 checksum-ները աղյուսակում։ Ոչ մի երրորդ կողմի host կամ hotlink չի օգտագործվում։
+
+Լոգոյի մեջ դիտվում են `#E3003A`, `#1D1D1B`, `#6F6F6E`, `#8A1230` և սպիտակը։ Պաշտոնական կայքի CSS-ից դիտվում են նաև `#E4003A`, `#1C2125`, `#464F55`, `#EDF3F6`, `#D1DCE2`, `#F6F9FB`, `#A9143D` և `#78AD57`։ Դրանք գրանցված են `brand-tokens.json`-ում՝ դերային mapping-ով։ Լոգոն չի վերագծվում, չի ձգվում և չի վերագունավորվում։

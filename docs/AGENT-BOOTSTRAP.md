@@ -26,3 +26,13 @@ Read `house-net-control.json`, resolve the trusted control plane, run its curren
 
 - [Official Codex instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
 - [Official Codex configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
+
+---
+
+## Հայերեն
+
+# Գործակալի bootstrap
+
+Codex-ի global քարտեզը և repository instructions-ը յուրաքանչյուր նոր session ուղղորդում են դեպի `/home/gevorg/house-net-control-plane`, ընթացիկ manifest-ը և `bin/housenet-preflight --json`։ Policy-ի ամբողջ տեքստը չի պատճենվում AGENTS.md-ում։ Եթե mandatory preflight-ը ձախողվի, գործակալը պետք է կանգ առնի և հաղորդի պատճառը։
+
+Մարդկանց համար նախատեսված փաստաթղթերը պետք է լինեն English + Հայերեն։ Machine, code և agent bootstrap ֆայլերը կարող են մնալ English-only։ Claude Code-ը այս WSL-ում չկա, ուստի managed hook-երը սպասման մեջ են։

@@ -19,3 +19,13 @@ Class A because it controls policy, approvals and agent behavior. Runtime: Pytho
 ## Policy updates
 
 An approved semantic change creates a reviewed policy snapshot and regenerated human view. Update manifest hashes and coverage deliberately. Issue new lock metadata and an executable snapshot to affected repositories through approved PRs. Never change the immutable source-policy artifact; new owner sources receive their own provenance records and a reviewed migration.
+
+---
+
+## Հայերեն
+
+# Պահոցի lifecycle
+
+Հաջորդականությունը՝ **ԱՌԱՋԱՐԿ → ԴԱՍԱԿԱՐԳԵԼ → ՍԵՓԱԿԱՆԱՏԻՐՈՋ OK → ՍՏԵՂԾԵԼ → BOOTSTRAP → ՎԱՎԵՐԱՑՆԵԼ → ՇԱՀԱԳՈՐԾԵԼ → ՎԵՐԱԴԱՍԱԿԱՐԳԵԼ / ԱՐԽԻՎԱՑՆԵԼ**։ Նախ առաջարկում են անունը, նպատակը, A/B/C դասը, տեխնոլոգիան, CI-ի կարիքը, deployment-ը, զգայունությունը և baseline-ը։ Ստեղծումը և configuration-ը պահանջում են explicit owner approval։
+
+Հաստատված պահոցը գրանցվում է control plane-ում՝ approval reference-ով, applicable rules-ով և immutable policy commit-ով։ Meaningful աշխատանքը գնում է branch → change → test → PR → green CI → merge ճանապարհով։ Class A է այս պահոցը, քանի որ այն վերահսկում է policy-ն, հաստատումները և agent behavior-ը։

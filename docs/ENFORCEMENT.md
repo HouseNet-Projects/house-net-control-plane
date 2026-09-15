@@ -26,3 +26,15 @@ Do not auto-fix a failed preflight. Report the failing check. For an authorized 
 ## Live verification
 
 The installation's observed settings, server capability response and session evidence are recorded in [audit/VERIFICATION.md](../audit/VERIFICATION.md). Current account UI-only defaults remain outside this repository's authority and were not changed.
+
+---
+
+## Հայերեն
+
+# Enforcement
+
+Codex-ի և պահոցի instruction-ները ուղղորդում են ընթացիկ policy-ին, բայց չեն հանդիսանում շրջանցման ենթակա hard hook։ Local preflight-ը non-zero է վերադարձնում սխալ identity-ի, remote-ի, integrity-ի, registry-ի, Git baseline-ի կամ հնացած checkout-ի դեպքում։ Claude Code-ը այս WSL-ում տեղադրված չէ։
+
+GitHub CI-ն ստուգում է schema-ները, policy coverage-ը, content-ը, workflow-ները, syntax-ը և tests-ը։ Reusable gate-ը կիրառելի է միայն ապագայում հաստատված պահոցներում և պահանջում է pinned trusted revision։ GitHub server protection-ը սահմանափակված է ընթացիկ personal private plan-ով, ուստի անհասանելի հնարավորությունները չեն ներկայացվում որպես enforced։
+
+Պարտադիր հաստատումները ներառում են պահոցի ստեղծումը, configuration-ը, reclassification-ը, production automation-ը և հստակ destructive գործողությունները։ Content validator-ը ստուգում է registration-ը, namespace-ը, դասը, version-ը, commit-ը, required files-ը, workflow permissions-ը և human-facing EN + HY պայմանագիրը։ Failed preflight-ը չի auto-fix արվում․ պետք է հաղորդել պատճառը և օգտագործել հաստատված PR կամ revert։

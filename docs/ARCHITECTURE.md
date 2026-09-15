@@ -28,3 +28,13 @@ Future registry changes require a new reviewed executable snapshot. The caller m
 A caller cannot supply the authoritative registry or expected repository name. GitHub supplies the caller context. Registry approval records are auditable assertions tied to owner review, not cryptographic proof that the owner approved a specific change. A person who can change the trusted validator can change enforcement; protect its branch where the plan supports it.
 
 The content validator checks known dangerous patterns. It cannot prove that arbitrary shell code is safe, detect all secrets, or replace deployment review. Third-party dependency review and policy exceptions remain explicit decisions.
+
+---
+
+## Հայերեն
+
+# Ճարտարապետություն
+
+`policy/*.json`-ը պահում է մեքենայական որոշումները։ Յուրաքանչյուր կանոն ունի եզակի ID, տիրույթ, մակարդակ, դասերի կիրառելիություն, ակնկալվող որոշում, հաստատման պահանջ և enforcement-ի եղանակ։ `policy/manifest.json`-ը գրանցում է տարբերակը, աղբյուրի checksum-ը, ֆայլերի ցանկը և բաժինների ծածկույթը։ `docs/POLICY.md`-ը ստեղծված մարդկային ներկայացումն է, իսկ սկզբնական փաստաթուղթը մնում է անփոփոխ provenance աղբյուր։
+
+Policy snapshot-ը և executable gate-ի revision-ը առանձին immutable հղումներ են։ Gate-ը ստուգում է caller-ի namespace-ը, registry-ն, ֆայլերը, workflow-ները և երկլեզու փաստաթղթերը։ Այս control plane-ը չի ապացուցում shell code-ի անվտանգությունը, բոլոր գաղտնիքների բացակայությունը կամ մարդու հաստատման մտադրությունը։

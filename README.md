@@ -1,3 +1,5 @@
+## English
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/control-plane-hero-dark.svg">
@@ -10,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml"><img alt="Control plane CI" src="https://github.com/HouseNet-Projects/house-net-control-plane/actions/workflows/control-plane-ci.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy 1.0.0</a>
+  <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/POLICY.md">Policy 1.1.0</a>
   <a href="https://github.com/HouseNet-Projects/house-net-control-plane/blob/main/docs/ENFORCEMENT.md">Enforcement map</a>
 </p>
 
@@ -105,3 +107,34 @@ Meaningful changes use `branch → change → test → PR → green CI → merge
 ## Maintainer note
 
 HouseNet-Projects owns this private control plane. The goal is the minimum correct configuration for the actual risk: simple, private, secure, auditable, reproducible and intentional.
+
+---
+
+## Հայերեն
+
+<p align="center"><strong>HOUSE NET · ԻՆԺԵՆԵՐԱԿԱՆ ԿԱՌԱՎԱՐՄԱՆ ՀԱՐԹԱԿ</strong><br>HouseNet-ի ինժեներական քաղաքականության, պահոցների դասակարգման, հաստատումների և գործակալների կանոնական կենտրոնը։</p>
+
+### Կառավարման հարթակի կարգավիճակ
+
+| Մակերես | Ընթացիկ վիճակ |
+| :--- | :--- |
+| Կառավարման հարթակ | ԱԿՏԻՎ |
+| CI | ԿԱՆԱՉ |
+| Քաղաքականություն | 1.1.0 |
+| Դասակարգում | CLASS A — CRITICAL |
+| Իրավասու սեփականատեր | HouseNet-Projects |
+| Codex bootstrap | ԿԻՐԱՐԿՎԱԾ |
+| Claude տեղային enforcement | ՍՊԱՍՄԱՆ ՄԵՋ — Claude Code-ը WSL-ում տեղադրված չէ |
+| GitHub branch protection | ԱՆՀԱՍԱՆԵԼԻ՝ ընթացիկ պլանով |
+
+### Իշխանություն, գործակալներ և enforcement
+
+Միայն `HouseNet-Projects`-ն է իրավասու։ Codex-ը նախ ստուգում է ինքնությունը, կարդում է ընթացիկ control plane-ը և գործարկում է preflight-ը։ Claude-ի տեղային enforcement-ը սպասման մեջ է, քանի որ այս WSL-ում Claude Code չկա։ CI-ն ստուգում է սխեմաները, կանոնների ծածկույթը, դասակարգումը, բովանդակությունը, workflow-ները և երկլեզու պայմանագիրը։
+
+### Դասակարգում և մեքենայական հեղինակություն
+
+Class A-ը կրիտիկական համակարգերի համար է, Class B-ը՝ սովորական պահպանվող ծրագրերի, Class C-ը՝ թեթև և ցածր ռիսկի նախագծերի։ Մեքենայական կանոնները գտնվում են `policy/`-ում, սխեմաները՝ `schemas/`-ում, իսկ ռեեստրը՝ `registry/`-ում։ Մարդկանց համար նախատեսված բոլոր նյութերը ունեն ամբողջական English և Հայերեն բաժիններ։
+
+### Արագ նավիգացիա
+
+Enforcement՝ [`docs/ENFORCEMENT.md`](docs/ENFORCEMENT.md) · lifecycle՝ [`docs/REPOSITORY-LIFECYCLE.md`](docs/REPOSITORY-LIFECYCLE.md) · բրենդային աղբյուր՝ [`assets/brand/BRAND.md`](assets/brand/BRAND.md) · քաղաքականության մեքենայական հեղինակություն՝ [`policy/`](policy/)
