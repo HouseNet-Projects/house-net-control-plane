@@ -17,7 +17,9 @@ from referencing import Registry, Resource
 OWNER = 'HouseNet-Projects'
 CANONICAL = OWNER + '/house-net-control-plane'
 SOURCE_SHA = 'a15b6b22aeecc7beaaf2f13e9de20e45b1a49be24c6ba280a5b3ac364f034491'
+POLICY_VERSION = '1.4.2'
 ROOT = Path(__file__).resolve().parents[1]
+SEMVER_RE = re.compile(r'^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$')
 
 class Invalid(ValueError):
     pass
@@ -48,6 +50,56 @@ def safe_path(root, relative):
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def require_semver(value, where):
+    require(isinstance(value, str) and SEMVER_RE.fullmatch(value) is not None, 'Invalid SemVer at ' + where)
+
+def version_contract(target, record):
+    if not record.get('versioned', False):
+        return
+    source = record.get('canonical_version_source')
+    require(isinstance(source, dict), 'Versioned repository lacks canonical source: ' + record['repository'])
+    path = safe_path(target, source['path'])
+    require(path.is_file(), 'Canonical version source missing: ' + source['path'])
+    value = load(path)
+    actual = value
+    for part in source['field'].split('.'):
+        require(isinstance(actual, dict) and part in actual, 'Canonical version field missing: ' + source['field'])
+        actual = actual[part]
+    require_semver(actual, source['path'] + '#' + source['field'])
+    require(actual == record['current_version'], 'Registered current version mismatch: ' + record['repository'])
+    require(record['version_scheme'] == 'semver', 'Unsupported version scheme without explicit exception')
+    for surface in record.get('version_surfaces', []):
+        surface_path = safe_path(target, surface['path'])
+        require(surface_path.is_file(), 'Registered version surface missing: ' + surface['path'])
+        text = surface_path.read_text()
+        require(actual in text, 'VERSION DRIFT: ' + surface['path'] + ' expected ' + actual)
+
+
+PROVIDER_NAMES = re.compile(r"\b(?:Codex|Claude|OpenAI|Anthropic|ChatGPT|GPT-[0-9A-Za-z.-]+)\b", re.I)
+
+HUMAN_FACING_EXCLUDES = {
+    'docs/source/HouseNet-GitHub-Policy-v1.0.md',
+    'AGENTS.md', 'CLAUDE.md',
+}
+
+def human_facing_paths(root):
+    """Discover active human-facing Markdown surfaces from the canonical contract."""
+    paths = []
+    for p in root.rglob('*.md'):
+        if '.git' in p.parts or p.name in {'AGENTS.md','CLAUDE.md'} or '.claude' in p.parts or '.secure' in p.parts or 'docs/source' in str(p.relative_to(root)) or 'audit' in p.parts or '05_Archive' in p.parts or 'WORKSPACE' in p.parts:
+            continue
+        paths.append(p)
+    return sorted(paths)
+
+def validate_provider_neutral_surfaces(root):
+    """Reject provider names in every active human-facing surface and active SVG."""
+    paths = list(human_facing_paths(root))
+    paths += [p for p in (root / 'assets').rglob('*.svg') if p.is_file()]
+    for path in paths:
+        text = path.read_text(errors='ignore')
+        hits = [m.group(0) for m in PROVIDER_NAMES.finditer(text)]
+        require(not hits, 'Provider product name in active presentation: ' + str(path.relative_to(root)) + ' (' + ', '.join(sorted(set(hits), key=str.lower)) + ')')
 
 def command(args, cwd=None, timeout=20):
     try:
@@ -100,8 +152,19 @@ def applicable(items, classification):
     return sorted(r['id'] for r in items if classification in r['applicability']['classes'])
 
 def human_view(items):
-    return '# HouseNet policy · 1.0.0\n\nGenerated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).\n\n' + ''.join(
-        '## ' + r['id'] + ' · ' + r['primitive'] + '\n\n' + r['level'] + ' · ' + r['scope'] + ' · Classes ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nApproval: ' + r['approval_requirement'] + '. Enforcement: ' + r['enforcement']['mechanism'] + '. Source sections: ' + ', '.join(map(str, r['source_sections'])) + '.\n\n' for r in sorted(items, key=lambda x: x['id']))
+    english = '# HouseNet policy · ' + POLICY_VERSION + ' <!-- housenet-version: policy_version -->\n\n## English\n\nGenerated from machine authority. Do not edit by hand. Original approved text is preserved in [source](source/HouseNet-GitHub-Policy-v1.0.md).\n\n' + ''.join(
+        '### ' + r['id'] + ' · ' + r['primitive'] + '\n\n' + r['level'] + ' · ' + r['scope'] + ' · Classes ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nApproval: ' + r['approval_requirement'] + '. Enforcement: ' + r['enforcement']['mechanism'] + '. Source sections: ' + ', '.join(map(str, r['source_sections'])) + '.\n\n' for r in sorted(items, key=lambda x: x['id']))
+    armenian = '# HouseNet-ի քաղաքականություն · ' + POLICY_VERSION + '\n\nՄեքենայական հեղինակությունից ստեղծված ներկայացում է։ Խմբագրել միայն մեքենայական կանոնները։ Սկզբնական հաստատված քաղաքականությունը պահպանված է [աղբյուրում](source/HouseNet-GitHub-Policy-v1.0.md)։\n\n' + ''.join(
+        '### ' + r['id'] + ' · ' + r['primitive'] + '\n\nՄակարդակ՝ ' + r['level'] + ' · Տիրույթ՝ ' + r['scope'] + ' · Դասեր՝ ' + ', '.join(r['applicability']['classes']) + '\n\n```json\n' + json.dumps(r['expected'], indent=2, ensure_ascii=False) + '\n```\n\nՀաստատում՝ ' + r['approval_requirement'] + '։ Կիրարկում՝ ' + r['enforcement']['mechanism'] + '։ Աղբյուրի բաժիններ՝ ' + ', '.join(map(str, r['source_sections'])) + '։\n\n' for r in sorted(items, key=lambda x: x['id']))
+    return english + '---\n\n## Հայերեն\n\n' + armenian
+
+def validate_bilingual_documents(root):
+    for path in human_facing_paths(root):
+        text = path.read_text()
+        en = re.search(r'^## English\s*$([\s\S]*?)(?=^## |\Z)', text, re.M)
+        hy = re.search(r'^## Հայերեն\s*$([\s\S]*?)(?=^## |\Z)', text, re.M)
+        require(en and en.group(1).strip(), 'English section missing or empty: ' + str(path.relative_to(root)))
+        require(hy and hy.group(1).strip(), 'Armenian section missing or empty: ' + str(path.relative_to(root)))
 
 def validate_policy(root):
     validators = schemas(root)
@@ -145,9 +208,39 @@ def validate_policy(root):
         expected = sorted(r['id'] for r in items if section in r['source_sections'])
         require(bool(expected) and sorted(entry['rule_ids']) == expected, 'Rule/source coverage drift')
         covered.update(entry['rule_ids'])
-    require(covered == set(index), 'Unmapped rule')
-    require((root / 'docs/POLICY.md').read_text() == human_view(items), 'Generated human policy drift')
+    supplemental = {x['id'] for x in manifest.get('supplemental_rules', [])}
+    require(supplemental <= set(index), 'Unknown supplemental rule')
+    require(covered | supplemental == set(index), 'Unmapped rule')
+    require((root / 'docs/POLICY.md').read_text().rstrip() == human_view(items).rstrip(), 'Generated human policy drift')
     return validators, manifest, items
+
+def validate_design_system_certification(root, records, target=None, record=None):
+    """Validate consumer declarations against the certified Design System release."""
+    ds = next((x for x in records if x['repository'] == 'HouseNet-Projects/house-net-design-system'), None)
+    require(ds is not None, 'Certified Design System registration missing')
+    cert = ds.get('certified_release')
+    require(isinstance(cert, dict) and cert.get('status') == 'certified', 'Design System release is not certified')
+    require(cert.get('version') == ds.get('current_version'), 'Certified Design System version mismatch')
+    require(cert.get('control_plane_compatibility') == ds.get('control_plane_version'), 'Certified Design System compatibility mismatch')
+    require(re.fullmatch(r'[0-9a-f]{40}', cert.get('commit','')) is not None, 'Certified Design System commit invalid')
+    for item in records:
+        design = item.get('design_system', {})
+        require(design.get('asset_source') == 'HouseNet-Projects/house-net-design-system', 'Unapproved Design System asset source: ' + item['repository'])
+        require(design.get('version') == cert['version'], 'Design System version is not the certified release: ' + item['repository'])
+        if item['repository'] == ds['repository']:
+            require(design.get('control_plane_compatibility') in {cert.get('control_plane_compatibility'), item['control_plane_version']}, 'Design System compatibility mismatch: ' + item['repository'])
+        else:
+            require(design.get('control_plane_compatibility') == item['control_plane_version'], 'Design System compatibility mismatch: ' + item['repository'])
+    if target is not None and record and record['repository'] == ds['repository'] and (target / '.git').exists():
+        head = command(['git','rev-parse','HEAD'], target)
+        if head == cert['commit']:
+            manifest = json.loads(command(['git','show', cert['commit'] + ':release/manifest.json'], target))
+            require(manifest.get('version') == cert['version'] and manifest.get('control_plane_version') == cert['control_plane_compatibility'], 'Certified release commit content mismatch')
+        else:
+            # A not-yet-certified Design System branch may pass only as a transition candidate.
+            manifest = json.loads(command(['git','show', head + ':release/manifest.json'], target))
+            require(manifest.get('version') == cert['version'], 'Design System candidate version mismatch')
+            require(manifest.get('control_plane_version') == record['control_plane_version'], 'Design System candidate compatibility mismatch')
 
 def registry(root, validators, items):
     data = load(root / 'registry/repositories.json')
@@ -156,8 +249,19 @@ def registry(root, validators, items):
     require(len(names) == len(set(names)), 'Duplicate registration')
     require(CANONICAL in names, 'Control plane not registered')
     for r in data['repositories']:
+        require(re.fullmatch(r'HouseNet-Projects/house-net-[a-z0-9]+(?:-[a-z0-9]+)*', r['repository']) is not None, 'Canonical HouseNet repository name required: ' + r['repository'])
         require(r['applicable_rules'] == applicable(items, r['classification']), 'Applicable rule set incomplete: ' + r['repository'])
         require(r['approval']['state'] == 'approved', 'Repository not approved: ' + r['repository'])
+        require(r.get('data_classification') in {'PUBLIC','INTERNAL','CONFIDENTIAL','RESTRICTED','UNKNOWN'}, 'Invalid data classification: ' + r['repository'])
+        design = r.get('design_system')
+        require(isinstance(design, dict), 'Design System declaration missing: ' + r['repository'])
+        require(design.get('asset_source') == 'HouseNet-Projects/house-net-design-system', 'Unapproved Design System asset source: ' + r['repository'])
+        require(design.get('readme_contract') == 'bilingual_status_navigation' and design.get('human_docs_policy') == 'en_hy_required', 'Design System documentation contract invalid: ' + r['repository'])
+        require(design.get('category') in {'CONTROL','PRODUCT','DESIGN_SYSTEM','TOOLING','DATA','DOCUMENTATION','LEGACY_ARCHIVE'}, 'Invalid Design System repository category: ' + r['repository'])
+        migration = r.get('migration')
+        require(isinstance(migration, dict) and migration.get('stage') in ['DISCOVERED','QUARANTINED','AUDITED','PROPOSED','OWNER_APPROVED','MIGRATED','CERTIFIED','CANONICAL'], 'Migration registration missing: ' + r['repository'])
+        if migration.get('stage') == 'CANONICAL':
+            require(migration.get('canonical_status') == 'CANONICAL' and migration.get('certification_status') == 'CERTIFIED', 'Canonical repository lacks certification: ' + r['repository'])
         for e in r['profile']['exceptions']:
             require(e['rule_id'] in r['applicable_rules'], 'Unknown exception rule')
         if r['repository'] == CANONICAL:
@@ -239,6 +343,15 @@ def scan_workflows(root, record, values, action_reviews):
                         require('${{ github.event.' not in step['run'], 'Untrusted event expression in shell; pass through environment')
     return warnings
 
+def check_provider_independence(target, record):
+    providers = {'OPENAI_API_KEY': 'OpenAI', 'ANTHROPIC_API_KEY': 'Anthropic', 'GEMINI_API_KEY': 'Google'}
+    registered = {d.get('provider','').lower() for d in record.get('external_dependencies', []) if d.get('runtime') and d.get('approval') == 'approved'}
+    for path in sorted((target / '.github/workflows').glob('*.y*ml')):
+        text = path.read_text()
+        for variable, provider in providers.items():
+            if variable in text and provider.lower() not in registered:
+                raise Invalid('Unregistered runtime AI provider dependency in ' + path.name + ': ' + variable)
+
 def check_content(root):
     # Conservative tripwires, not a complete secret scanner.
     patterns = [re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'), re.compile(rb'gh[pousr]_[A-Za-z0-9]{30,}'), re.compile(rb'github_pat_[A-Za-z0-9_]{40,}')]
@@ -253,15 +366,19 @@ def check_content(root):
         require(not any(p.search(data) for p in patterns), 'Potential credential in tracked file: ' + relative + '; value withheld')
 
 def validate_repository(root, target, expected_repository=None):
+    validate_provider_neutral_surfaces(target)
     validators, manifest, items = validate_policy(root)
     records = registry(root, validators, items)
+    validate_design_system_certification(root, records, target, None)
     lock = load(safe_path(target, 'house-net-control.json'))
     validate_schema(validators, 'repository-lock.schema.json', lock)
     if expected_repository:
         require(lock['repository'] == expected_repository, 'Caller identity does not match repository lock')
+    require(re.fullmatch(r'HouseNet-Projects/house-net-[a-z0-9]+(?:-[a-z0-9]+)*', lock['repository']) is not None, 'Canonical HouseNet repository name required')
     matches = [r for r in records if r['repository'] == lock['repository']]
     require(len(matches) == 1, 'Repository is not registered in trusted control plane')
     r = matches[0]
+    validate_design_system_certification(root, records, target, r)
     require(lock['classification'] == r['classification'], 'Classification mismatch')
     require(lock['policy_version'] == r['control_plane_version'] == manifest['version'], 'Policy version mismatch')
     require(lock['policy_commit'] == r['control_plane_commit'], 'Policy commit mismatch')
@@ -277,18 +394,24 @@ def validate_repository(root, target, expected_repository=None):
             require(blob == (root / relative).read_text().strip(), 'Git policy snapshot differs: ' + relative)
     values = by_primitive(items)
     class_rules = values['classification.' + r['classification']]
-    required = set(class_rules['required_files']) | set(r['profile']['required_files']) | {'AGENTS.md','CLAUDE.md','house-net-control.json'}
+    required = set(class_rules['required_files']) | set(r['profile']['required_files']) | {'AGENTS.md','house-net-control.json'}
+    for adapter in r['profile'].get('compatibility_adapters', []):
+        if adapter.get('required'):
+            required.add(adapter['path'])
     for name in sorted(required):
         p = safe_path(target, name)
         require(p.is_file() and p.stat().st_size > 0, 'Required file missing/empty: ' + name)
-    for agent_file in ['AGENTS.md', 'CLAUDE.md']:
+    version_contract(target, r)
+    for agent_file in ['AGENTS.md']:
         text = (target / agent_file).read_text()
         require(all(x in text for x in ['house-net-control.json', 'housenet-preflight', 'house-net-control-plane']), 'Agent bootstrap map incomplete: ' + agent_file)
         require(len(text.encode()) < 4096, 'Agent map duplicates excessive policy')
     require(not any(p.is_file() for p in target.glob('LICENSE*')), 'License requires separately registered owner decision')
     reviews = load(root / 'policy-dependencies.json')['actions']
     scan_workflows(target, r, values, reviews)
+    check_provider_independence(target, r)
     check_content(target)
+    validate_bilingual_documents(target)
     return {'repository':r['repository'],'classification':r['classification'],'policy_version':manifest['version'],'policy_commit':r['control_plane_commit'],'rules':len(r['applicable_rules'])}
 
 def internal_links(root):
@@ -301,14 +424,17 @@ def internal_links(root):
             require((path.parent / relative).exists(), 'Broken internal link in ' + str(path.relative_to(root)) + ': ' + relative)
 
 def validate_control_plane(root):
+    validate_provider_neutral_surfaces(root)
     validators, manifest, items = validate_policy(root)
     records = registry(root, validators, items)
+    validate_design_system_certification(root, records)
     for path in (root / 'templates').glob('*.json'):
         validate_schema(validators, 'repository-lock.schema.json', load(path))
-    for name in ['AGENTS.md', 'CLAUDE.md']:
+    for name in ['AGENTS.md']:
         body = (root / 'templates' / name).read_text()
         require(len(body.encode()) < 4096 and all(x in body for x in ['house-net-control.json','housenet-preflight','house-net-control-plane']), 'Template integrity failure')
     internal_links(root)
+    validate_bilingual_documents(root)
     validate_repository(root, root, CANONICAL)
     return {'policy_version':manifest['version'],'source_sha256':SOURCE_SHA,'coverage_sections':len(manifest['coverage']),'unique_rules':len(items),'registered_repositories':len(records),'schemas':len(validators)}
 

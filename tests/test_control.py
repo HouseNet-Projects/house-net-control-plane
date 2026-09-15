@@ -2,6 +2,7 @@ import copy
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -36,7 +37,7 @@ class PolicyTests(unittest.TestCase):
     def test_complete_control_plane(self):
         result=c.validate_control_plane(self.root)
         self.assertEqual(result['coverage_sections'],30)
-        self.assertEqual(result['registered_repositories'],1)
+        self.assertEqual(result['registered_repositories'],3)
 
     def test_immutable_source(self):
         p=self.root/'docs/source/HouseNet-GitHub-Policy-v1.0.md'
@@ -87,12 +88,25 @@ class PolicyTests(unittest.TestCase):
         self.edit('house-net-control.json',lambda d:d.update(repository='unapproved/example'))
         self.reject(lambda:c.validate_repository(self.root,self.root,c.CANONICAL),'pattern')
 
+    def test_canonical_name_requires_house_net_prefix(self):
+        for name in ['HouseNet-Projects/command-center', 'HouseNet-Projects/House-Net-Test', 'HouseNet-Projects/random-repository', 'HouseNet-Projects/house-net--bad']:
+            self.edit('house-net-control.json',lambda d,n=name:d.update(repository=n))
+            self.reject(lambda n=name:c.validate_repository(self.root,self.root,n),'pattern|Canonical HouseNet repository name')
+
+    def test_design_system_contract_required(self):
+        self.edit('registry/repositories.json',lambda d:d['repositories'][0].pop('design_system'))
+        self.reject(lambda:c.validate_control_plane(self.root),'required|Design System declaration')
+
+    def test_design_system_source_must_be_approved(self):
+        self.edit('registry/repositories.json',lambda d:d['repositories'][0]['design_system'].update(asset_source='unapproved/logo'))
+        self.reject(lambda:c.validate_control_plane(self.root),'const|Unapproved Design System asset source')
+
     def test_caller_cannot_impersonate_control_plane(self):
-        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/other'),'Caller identity')
+        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/house-net-other'),'Caller identity')
 
     def test_unregistered_caller(self):
-        self.edit('house-net-control.json',lambda d:d.update(repository='HouseNet-Projects/other'))
-        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/other'),'not registered')
+        self.edit('house-net-control.json',lambda d:d.update(repository='HouseNet-Projects/house-net-unknown'))
+        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/house-net-unknown'),'not registered')
 
     def test_unapproved_registration(self):
         self.edit('registry/repositories.json',lambda d:d['repositories'][0]['approval'].update(state='proposed'))
@@ -143,7 +157,8 @@ class PolicyTests(unittest.TestCase):
         self.reject(lambda:c.validate_repository(self.root,self.root,c.CANONICAL),'trusted review')
 
     def test_mutable_action_tag(self):
-        self.mutate_workflow('11d5960a326750d5838078e36cf38b85af677262','v4')
+        sha = re.search(r'actions/checkout@([0-9a-f]{40})', (self.root/'.github/workflows/control-plane-ci.yml').read_text()).group(1)
+        self.mutate_workflow(sha,'v4')
         self.reject(lambda:c.validate_repository(self.root,self.root,c.CANONICAL),'full commit SHA')
 
     def test_privileged_pr_trigger(self):
@@ -156,15 +171,15 @@ class PolicyTests(unittest.TestCase):
 
     def test_template_is_not_creation_approval(self):
         shutil.copy(self.root/'templates/house-net-control.json',self.root/'house-net-control.json')
-        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/proposed-repository'),'not registered')
+        self.reject(lambda:c.validate_repository(self.root,self.root,'HouseNet-Projects/house-net-proposed-repository'),'not registered')
 
     def test_control_plane_cannot_downgrade(self):
         self.edit('registry/repositories.json',lambda d:d['repositories'][0].update(classification='C',applicable_rules=c.applicable(c.rules(self.root),'C')))
         self.reject(lambda:c.validate_control_plane(self.root),'must be Class A')
 
-    def test_private_visibility_required(self):
+    def test_public_visibility_is_registered(self):
         self.edit('registry/repositories.json',lambda d:d['repositories'][0].update(visibility='public'))
-        self.reject(lambda:c.validate_control_plane(self.root),'const')
+        self.assertEqual(c.validate_control_plane(self.root)['registered_repositories'],3)
 
     def test_caller_action_distribution_without_git(self):
         self.assertFalse((self.root/'.git').exists())
@@ -175,6 +190,33 @@ class PolicyTests(unittest.TestCase):
         self.assertIn('.editorconfig',v['classification.B']['required_files'])
         self.assertEqual(v['classification.C']['required_files'],['README.md'])
         self.assertEqual(v['classification.C']['ci'],'none_unless_justified')
+
+    def test_provider_name_in_active_surface_fails(self):
+        (self.root / 'README.md').write_text('## English\n\nCodex status\n\n## Հայերեն\n\nԿարգավիճակ\n')
+        self.reject(lambda:c.validate_control_plane(self.root), 'Provider product name in active presentation')
+
+    def test_provider_name_in_historical_source_is_excluded(self):
+        (self.root/'docs/source/historical-provider-note.md').write_text('## English\n\nCodex historical reference\n\n## Հայերեն\n\nՊատմական հղում\n')
+        self.assertIsInstance(c.validate_control_plane(self.root), dict)
+
+    def test_bilingual_valid_document(self):
+        self.assertIsNone(c.validate_bilingual_documents(self.root))
+
+    def test_english_only_human_document_fails(self):
+        (self.root/'README.md').write_text('# English only\n')
+        self.reject(lambda:c.validate_bilingual_documents(self.root),'English section')
+
+    def test_armenian_only_human_document_fails(self):
+        (self.root/'README.md').write_text('# Միայն հայերեն\n\n## Հայերեն\n\nԲովանդակություն\n')
+        self.reject(lambda:c.validate_bilingual_documents(self.root),'English section')
+
+    def test_empty_armenian_section_fails(self):
+        (self.root/'README.md').write_text('# Test\n\n## English\n\nContent\n\n## Հայերեն\n')
+        self.reject(lambda:c.validate_bilingual_documents(self.root),'Armenian section')
+
+    def test_machine_files_are_english_only_allowed(self):
+        self.assertIsNone(c.validate_bilingual_documents(self.root))
+        self.assertEqual(json.loads((self.root/'policy/manifest.json').read_text())['version'],'1.4.2')
 
     def test_preflight_wrong_identity_blocks(self):
         with patch.object(c,'command',return_value='WrongIdentity'):
@@ -217,3 +259,79 @@ class PolicyTests(unittest.TestCase):
         self.assertFalse(json.loads(p.stdout)['ok'])
 
 if __name__=='__main__':unittest.main()
+
+class VersionSurfaceTests(unittest.TestCase):
+    def test_active_generated_region_rejects_conflicting_claim(self):
+        root = Path(tempfile.mkdtemp(prefix='housenet-version-'))
+        self.addCleanup(shutil.rmtree, root, ignore_errors=True)
+        shutil.copytree(c.ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
+        readme = root/'README.md'
+        text = readme.read_text()
+        start = '<!-- housenet-generated: control-plane-status:start -->'
+        pos = text.index('| **POLICY** | `1.4.2`')
+        readme.write_text(text[:pos] + '| **POLICY** | `1.0.0`' + text[pos + len('| **POLICY** | `1.4.2`'):])
+        result = subprocess.run([str(root/'bin/check-version-consistency'), str(root)], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('VERSION DRIFT', result.stdout)
+
+    def test_generation_restores_all_active_regions(self):
+        root = Path(tempfile.mkdtemp(prefix='housenet-generate-'))
+        self.addCleanup(shutil.rmtree, root, ignore_errors=True)
+        shutil.copytree(c.ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
+        p=root/'README.md'; p.write_text(p.read_text().replace('`1.4.2` · machine authority','`1.0.0` · machine authority'))
+        subprocess.check_call([str(root/'bin/generate-control-plane-status'),str(root)])
+        self.assertEqual(subprocess.run([str(root/'bin/check-version-consistency'),str(root)]).returncode,0)
+
+class FinalHardeningTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(prefix='housenet-final-')
+        self.root = Path(self.tmp.name) / 'control'
+        shutil.copytree(c.ROOT, self.root, ignore=shutil.ignore_patterns('.git','.venv','__pycache__'))
+        self.addCleanup(self.tmp.cleanup)
+
+    def test_claude_is_not_universal_requirement(self):
+        (self.root / 'CLAUDE.md').unlink()
+        self.assertEqual(c.validate_repository(self.root, self.root, c.CANONICAL)['repository'], c.CANONICAL)
+
+    def test_required_provider_adapter_is_enforced_only_when_registered(self):
+        p = self.root / 'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][0]['profile']['compatibility_adapters']=[{'path':'missing-adapter.md','required':True,'kind':'provider_compatibility'}]
+        p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'Required file'):
+            c.validate_repository(self.root, self.root, c.CANONICAL)
+
+    def test_new_human_surface_provider_name_fails(self):
+        p=self.root/'docs/new-human-surface.md'; p.write_text('## English\n\nClaude\n\n## Հայերեն\n\nԿլոդ\n')
+        with self.assertRaisesRegex(c.Invalid,'Provider product name'):
+            c.validate_provider_neutral_surfaces(self.root)
+
+    def test_design_system_version_must_match_certified_release(self):
+        p=self.root/'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][1]['design_system']['version']='1.0.0'; p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'not the certified release'):
+            c.validate_control_plane(self.root)
+
+    def test_design_system_compatibility_must_match_policy(self):
+        p=self.root/'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][1]['design_system']['control_plane_compatibility']='9.9.9'; p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'compatibility mismatch'):
+            c.validate_control_plane(self.root)
+
+    def test_non_certified_design_release_fails(self):
+        p=self.root/'registry/repositories.json'; data=json.loads(p.read_text())
+        data['repositories'][1]['certified_release']['status']='pending'; p.write_text(json.dumps(data,indent=2))
+        with self.assertRaisesRegex(c.Invalid,'not certified'):
+            c.validate_control_plane(self.root)
+
+class ProviderScopeTests(unittest.TestCase):
+    def test_registered_adapter_document_is_excluded(self):
+        with tempfile.TemporaryDirectory(prefix='housenet-adapter-') as td:
+            root=Path(td); (root/'.claude/docs').mkdir(parents=True)
+            (root/'.claude/docs/adapter.md').write_text('Claude adapter implementation notes')
+            c.validate_provider_neutral_surfaces(root)
+
+class AdapterRecoveryScopeTests(unittest.TestCase):
+    def test_secure_recovery_docs_are_not_provider_architecture(self):
+        with tempfile.TemporaryDirectory(prefix='housenet-secure-') as td:
+            root=Path(td); (root/'.secure').mkdir(); (root/'.secure/README.md').write_text('Use .claude/runtime adapter only')
+            c.validate_provider_neutral_surfaces(root)
