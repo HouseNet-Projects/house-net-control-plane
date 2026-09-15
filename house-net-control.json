@@ -3,6 +3,6 @@
   "classification": "A",
   "control_plane": "HouseNet-Projects/house-net-control-plane",
   "policy_version": "1.3.0",
-  "policy_commit": "aac27644f1bee99c38298bb73d235dd06993ce3c",
+  "policy_commit": "1b1ac44649215c4271aa441f926611714dd85a12",
   "approval_reference": "OWNER-MISSION-CONTROL-PLANE-1.0-2026-09-15"
 }
