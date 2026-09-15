@@ -1,15 +1,36 @@
 {
-  "version": "1.0.0",
+  "version": "1.4.2",
   "repositories": [
     {
       "repository": "HouseNet-Projects/house-net-control-plane",
       "classification": "A",
       "purpose": "Canonical engineering policy, approval, classification and agent control plane.",
       "owner": "HouseNet-Projects",
-      "visibility": "private",
-      "control_plane_version": "1.0.0",
-      "control_plane_commit": "72bb4b4bded5ffda7bf6f99a4a7f4fbccb07a871",
+      "visibility": "public",
+      "control_plane_version": "1.4.2",
+      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "versioned": true,
+      "canonical_version_source": {
+        "path": "release/manifest.json",
+        "field": "version"
+      },
+      "current_version": "1.4.2",
+      "version_scheme": "semver",
+      "release_state": "active",
+      "version_surfaces": [
+        {
+          "path": "README.md",
+          "field": "policy_version",
+          "kind": "text"
+        },
+        {
+          "path": "docs/POLICY.md",
+          "field": "policy_version",
+          "kind": "generated"
+        }
+      ],
       "applicable_rules": [
+        "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
         "HN-AUTHOR-EMAIL",
         "HN-AUTHOR-NAME",
         "HN-BRANCH",
@@ -21,11 +42,14 @@
         "HN-CONFIGURATION",
         "HN-CREATE",
         "HN-CREATION",
+        "HN-DATA-CLASSIFICATION",
         "HN-DEPENDENCIES",
         "HN-DEPLOYMENT",
         "HN-DEPRECATION",
+        "HN-DESIGN-SYSTEM-ADOPTION",
         "HN-DESTRUCTIVE",
         "HN-DEVELOPMENT",
+        "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
         "HN-EXPLICIT-IDENTITY",
         "HN-FILES",
         "HN-GOVERNANCE",
@@ -34,11 +58,13 @@
         "HN-LEVELS",
         "HN-LICENSE",
         "HN-METHODS",
+        "HN-MIGRATION-STAGED-ADOPTION",
         "HN-NAMESPACE",
         "HN-NAMING",
         "HN-OPERATING-FLOW",
         "HN-OUT-OF-SCOPE",
         "HN-PERMISSIONS",
+        "HN-PERSON-INDEPENDENT-AUTHORITY",
         "HN-PROPORTIONALITY",
         "HN-PROTECTION",
         "HN-PRS",
@@ -49,7 +75,9 @@
         "HN-SCOPE",
         "HN-SECRETS",
         "HN-SIGNAL",
+        "HN-SOURCE-OF-TRUTH",
         "HN-SOURCES",
+        "HN-VERSION-SINGLE-SOURCE",
         "HN-VERSIONING"
       ],
       "approval": {
@@ -79,7 +107,349 @@
           "docs/AGENT-BOOTSTRAP.md",
           "docs/REPOSITORY-LIFECYCLE.md"
         ],
-        "exceptions": []
+        "exceptions": [],
+        "compatibility_adapters": []
+      },
+      "data_classification": "INTERNAL",
+      "migration": {
+        "stage": "CANONICAL",
+        "source_type": "git",
+        "mode": "FULL_HISTORY",
+        "source": "HouseNet-Projects/house-net-control-plane",
+        "canonical_status": "CANONICAL",
+        "certification_status": "CERTIFIED"
+      },
+      "external_dependencies": [],
+      "design_system": {
+        "version": "1.1.0",
+        "category": "CONTROL",
+        "asset_source": "HouseNet-Projects/house-net-design-system",
+        "readme_contract": "bilingual_status_navigation",
+        "human_docs_policy": "en_hy_required",
+        "social_preview": {
+          "status": "manual_required",
+          "candidate_path": "HouseNet-Projects/house-net-design-system:assets/social/control-plane.svg",
+          "validated": true,
+          "applied": false,
+          "manual_action_required": true
+        },
+        "control_plane_compatibility": "1.4.2"
+      }
+    },
+    {
+      "repository": "HouseNet-Projects/house-net-design-system",
+      "classification": "B",
+      "purpose": "Canonical HouseNet brand, UI and bilingual document design system for products and operational documents.",
+      "owner": "HouseNet-Projects",
+      "visibility": "public",
+      "control_plane_version": "1.4.2",
+      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "versioned": true,
+      "canonical_version_source": {
+        "path": "release/manifest.json",
+        "field": "version"
+      },
+      "current_version": "1.1.0",
+      "version_scheme": "semver",
+      "release_state": "active",
+      "version_surfaces": [
+        {
+          "path": "README.md",
+          "field": "product_version",
+          "kind": "generated"
+        },
+        {
+          "path": "CHANGELOG.md",
+          "field": "release_version",
+          "kind": "generated"
+        }
+      ],
+      "certified_release": {
+        "version": "1.1.0",
+        "commit": "df7b6f8d86f1c10675bed8629fa8385758a5c9e4",
+        "control_plane_compatibility": "1.4.2",
+        "status": "certified"
+      },
+      "applicable_rules": [
+        "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+        "HN-AUTHOR-EMAIL",
+        "HN-AUTHOR-NAME",
+        "HN-BRANCH",
+        "HN-BRANCH-NAMES",
+        "HN-CI",
+        "HN-CLASS-B",
+        "HN-CLASSIFICATION",
+        "HN-COMMITS",
+        "HN-CONFIGURATION",
+        "HN-CREATE",
+        "HN-CREATION",
+        "HN-DATA-CLASSIFICATION",
+        "HN-DEPENDENCIES",
+        "HN-DEPLOYMENT",
+        "HN-DEPRECATION",
+        "HN-DESIGN-SYSTEM-ADOPTION",
+        "HN-DESTRUCTIVE",
+        "HN-DEVELOPMENT",
+        "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+        "HN-EXPLICIT-IDENTITY",
+        "HN-FILES",
+        "HN-GOVERNANCE",
+        "HN-IDENTITY",
+        "HN-INIT-BRANCH",
+        "HN-LEVELS",
+        "HN-LICENSE",
+        "HN-METHODS",
+        "HN-MIGRATION-STAGED-ADOPTION",
+        "HN-NAMESPACE",
+        "HN-NAMING",
+        "HN-OPERATING-FLOW",
+        "HN-OUT-OF-SCOPE",
+        "HN-PERMISSIONS",
+        "HN-PERSON-INDEPENDENT-AUTHORITY",
+        "HN-PROPORTIONALITY",
+        "HN-PROTECTION",
+        "HN-PRS",
+        "HN-PULL",
+        "HN-PURPOSE",
+        "HN-RECLASSIFY",
+        "HN-REVIEW",
+        "HN-SCOPE",
+        "HN-SECRETS",
+        "HN-SIGNAL",
+        "HN-SOURCE-OF-TRUTH",
+        "HN-SOURCES",
+        "HN-VERSION-SINGLE-SOURCE",
+        "HN-VERSIONING"
+      ],
+      "approval": {
+        "state": "approved",
+        "reference": "OWNER-MISSION-DESIGN-SYSTEM-1.0-2026-09-15",
+        "approved_by": "HouseNet-Projects"
+      },
+      "profile": {
+        "kind": "code",
+        "technology": [
+          "Portable JSON tokens",
+          "Markdown",
+          "SVG",
+          "Python 3.12+",
+          "OOXML source definitions"
+        ],
+        "dependencies": true,
+        "meaningful_ci": true,
+        "deployment": "none",
+        "data_sensitivity": "private_design_governance_no_secrets",
+        "required_files": [
+          "README.md",
+          ".gitignore",
+          ".editorconfig",
+          ".gitattributes"
+        ],
+        "exceptions": [],
+        "compatibility_adapters": []
+      },
+      "data_classification": "INTERNAL",
+      "migration": {
+        "stage": "CANONICAL",
+        "source_type": "git",
+        "mode": "FULL_HISTORY",
+        "source": "HouseNet-Projects/house-net-design-system",
+        "canonical_status": "CANONICAL",
+        "certification_status": "CERTIFIED"
+      },
+      "external_dependencies": [],
+      "design_system": {
+        "version": "1.1.0",
+        "category": "DESIGN_SYSTEM",
+        "asset_source": "HouseNet-Projects/house-net-design-system",
+        "readme_contract": "bilingual_status_navigation",
+        "human_docs_policy": "en_hy_required",
+        "social_preview": {
+          "status": "manual_required",
+          "candidate_path": "HouseNet-Projects/house-net-design-system:assets/social/design-system.svg",
+          "validated": true,
+          "applied": false,
+          "manual_action_required": true
+        },
+        "control_plane_compatibility": "1.4.2"
+      }
+    },
+    {
+      "repository": "HouseNet-Projects/house-net-command-center",
+      "classification": "A",
+      "purpose": "Canonical HouseNet repository for the Command-center operational workspace and Deputy agent runtime.",
+      "owner": "HouseNet-Projects",
+      "visibility": "public",
+      "control_plane_version": "1.4.2",
+      "control_plane_commit": "4673d4bf692b8ac2c55a82306a22fc0fa263c259",
+      "versioned": false,
+      "release_state": "active",
+      "applicable_rules": [
+        "HN-ARCH-AI-PROVIDER-INDEPENDENCE",
+        "HN-AUTHOR-EMAIL",
+        "HN-AUTHOR-NAME",
+        "HN-BRANCH",
+        "HN-BRANCH-NAMES",
+        "HN-CI",
+        "HN-CLASS-A",
+        "HN-CLASSIFICATION",
+        "HN-COMMITS",
+        "HN-CONFIGURATION",
+        "HN-CREATE",
+        "HN-CREATION",
+        "HN-DATA-CLASSIFICATION",
+        "HN-DEPENDENCIES",
+        "HN-DEPLOYMENT",
+        "HN-DEPRECATION",
+        "HN-DESIGN-SYSTEM-ADOPTION",
+        "HN-DESTRUCTIVE",
+        "HN-DEVELOPMENT",
+        "HN-DOC-HUMAN-VISIBLE-BILINGUAL",
+        "HN-EXPLICIT-IDENTITY",
+        "HN-FILES",
+        "HN-GOVERNANCE",
+        "HN-IDENTITY",
+        "HN-INIT-BRANCH",
+        "HN-LEVELS",
+        "HN-LICENSE",
+        "HN-METHODS",
+        "HN-MIGRATION-STAGED-ADOPTION",
+        "HN-NAMESPACE",
+        "HN-NAMING",
+        "HN-OPERATING-FLOW",
+        "HN-OUT-OF-SCOPE",
+        "HN-PERMISSIONS",
+        "HN-PERSON-INDEPENDENT-AUTHORITY",
+        "HN-PROPORTIONALITY",
+        "HN-PROTECTION",
+        "HN-PRS",
+        "HN-PULL",
+        "HN-PURPOSE",
+        "HN-RECLASSIFY",
+        "HN-REVIEW",
+        "HN-SCOPE",
+        "HN-SECRETS",
+        "HN-SIGNAL",
+        "HN-SOURCE-OF-TRUTH",
+        "HN-SOURCES",
+        "HN-VERSION-SINGLE-SOURCE",
+        "HN-VERSIONING"
+      ],
+      "approval": {
+        "state": "approved",
+        "reference": "OWNER-APPROVAL-DEPUTY-MIGRATION-2026-09-15",
+        "approved_by": "HouseNet-Projects"
+      },
+      "profile": {
+        "kind": "code",
+        "technology": [
+          "Python 3.12+",
+          "GPG",
+          "Git LFS",
+          "Windows/WSL integrations",
+          "Office documents"
+        ],
+        "dependencies": true,
+        "meaningful_ci": true,
+        "deployment": "nonproduction",
+        "data_sensitivity": "mixed_INTERNAL_CONFIDENTIAL_RESTRICTED_boundaries",
+        "required_files": [
+          "README.md",
+          ".gitignore",
+          ".gitattributes",
+          "CLAUDE.md",
+          "bootstrap.py"
+        ],
+        "exceptions": [],
+        "compatibility_adapters": [
+          {
+            "path": "CLAUDE.md",
+            "required": true,
+            "kind": "provider_compatibility"
+          }
+        ]
+      },
+      "data_classification": "CONFIDENTIAL",
+      "migration": {
+        "stage": "CANONICAL",
+        "source_type": "git",
+        "mode": "FULL_HISTORY",
+        "source": "https://github.com/ohanyan88-cmd/Command-center@d49d60bdff468b662d88d21e00458ce59646a5ca",
+        "canonical_status": "CANONICAL",
+        "certification_status": "CERTIFIED"
+      },
+      "external_dependencies": [
+        {
+          "service": "Outlook desktop",
+          "provider": "Microsoft Outlook",
+          "purpose": "calendar and mail adapters",
+          "environment": [
+            "development",
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "Telegram Bot API",
+          "provider": "Telegram",
+          "purpose": "approved messaging integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "WhatsApp Cloud API",
+          "provider": "Meta",
+          "purpose": "approved messaging integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "Bitrix24",
+          "provider": "Bitrix24",
+          "purpose": "CRM integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "high",
+          "approval": "pending",
+          "runtime": true
+        },
+        {
+          "service": "MikroBILL",
+          "provider": "MikroBILL",
+          "purpose": "billing integration",
+          "environment": [
+            "operational"
+          ],
+          "criticality": "critical",
+          "approval": "pending",
+          "runtime": true
+        }
+      ],
+      "design_system": {
+        "version": "1.1.0",
+        "category": "PRODUCT",
+        "asset_source": "HouseNet-Projects/house-net-design-system",
+        "readme_contract": "bilingual_status_navigation",
+        "human_docs_policy": "en_hy_required",
+        "social_preview": {
+          "status": "manual_required",
+          "candidate_path": "HouseNet-Projects/house-net-design-system:assets/social/command-center.svg",
+          "validated": true,
+          "applied": false,
+          "manual_action_required": true
+        },
+        "control_plane_compatibility": "1.4.2"
       }
     }
   ]
