@@ -319,7 +319,6 @@ def validate_repository(root, target, expected_repository=None):
     require(lock['policy_version'] == r['control_plane_version'] == manifest['version'], 'Policy version mismatch')
     require(lock['policy_commit'] == r['control_plane_commit'], 'Policy commit mismatch')
     require(lock['approval_reference'] == r['approval']['reference'], 'Approval reference mismatch')
-    version_contract(target, r)
     # Require the pinned commit to carry the exact machine policy snapshot in use.
     snapshot = load(root / 'policy-snapshot.json')
     require(snapshot['commit'] == r['control_plane_commit'], 'Distribution policy snapshot mismatch')
@@ -335,6 +334,7 @@ def validate_repository(root, target, expected_repository=None):
     for name in sorted(required):
         p = safe_path(target, name)
         require(p.is_file() and p.stat().st_size > 0, 'Required file missing/empty: ' + name)
+    version_contract(target, r)
     for agent_file in ['AGENTS.md', 'CLAUDE.md']:
         text = (target / agent_file).read_text()
         require(all(x in text for x in ['house-net-control.json', 'housenet-preflight', 'house-net-control-plane']), 'Agent bootstrap map incomplete: ' + agent_file)
