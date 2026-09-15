@@ -24,6 +24,7 @@
     "schemas/manifest.schema.json",
     "schemas/policy.schema.json",
     "schemas/registry.schema.json",
+    "schemas/release-manifest.schema.json",
     "schemas/repository-class.schema.json",
     "schemas/repository-lock.schema.json",
     "schemas/repository-registration.schema.json"
@@ -297,6 +298,7 @@
     "schemas/registry.schema.json": "64c11a82a33a0566ed9e90fe1de10706c85a1c9491b921fced552d19002db188",
     "schemas/repository-class.schema.json": "f3309da9a401b352f46da4c050f6c80a454a00ad8fb407b7590de8ab4236782e",
     "schemas/repository-lock.schema.json": "aa73b2bb36f526a25cd1b0c4fbfa54c3391831b6b0ced9395514a19d4f35daf3",
-    "schemas/repository-registration.schema.json": "8439df0b1be251de9ec7d0f9f34de8f500ee8c1f2f18d15ec445fc342e9deff9"
+    "schemas/repository-registration.schema.json": "8439df0b1be251de9ec7d0f9f34de8f500ee8c1f2f18d15ec445fc342e9deff9",
+    "schemas/release-manifest.schema.json": "38cc4c0e03ca0fccb54da9751e346b15a9befef7387024ff5afb1c0b83f61802"
   }
 }
